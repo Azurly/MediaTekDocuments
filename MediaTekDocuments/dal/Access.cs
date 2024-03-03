@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using System.Configuration;
+using Serilog;
 
 namespace MediaTekDocuments.dal
 {
@@ -15,9 +16,13 @@ namespace MediaTekDocuments.dal
     public class Access
     {
         /// <summary>
+        /// Nom se sécurité ( MISSION 5 )
+        /// </summary>
+        private static readonly string authenticationName = "MediatekDocuments.Properties.Settings.mediatekdocumentsAuthenticationString";
+        /// <summary>
         /// adresse de l'API
         /// </summary>
-        private static readonly string uriApi = "http://localhost/rest_mediatekdocuments/";
+        private static readonly string uriApiName = "MediatekDocuments.Properties.Settings.mediatekdocumentsConnectionString";
         /// <summary>
         /// instance unique de la classe
         /// </summary>
@@ -43,19 +48,43 @@ namespace MediaTekDocuments.dal
         /// </summary>
         private Access()
         {
-            String authenticationString;
+            String authenticationString = null;
+            String uriApi = null;
             try
             {
-                authenticationString = "admin:adminpwd";
+                /*Mettre GetConnectionStringByName en commentaire lors des tests avec Specflow*/
+                authenticationString = /*"admin:adminpwd"*/GetConnectionStringByName(authenticationName);
+                uriApi = GetConnectionStringByName(uriApiName);
                 api = manager.ApiRest.GetInstance(uriApi, authenticationString);
+                Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Verbose()
+                .WriteTo.Console()
+                .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day)
+                .WriteTo.File("logs/errorlog.txt", restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information)
+                .WriteTo.EventLog("MediatekDocuments", manageEventSource: true, restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Fatal)
+                .CreateLogger();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                Log.Fatal("Erreur Access : " + e.Message);
                 Environment.Exit(0);
             }
         }
 
+        /// <summary>
+        /// Récupération de la chaîne de connexion
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        static string GetConnectionStringByName(string name)
+        {
+            string returnValue = null;
+            ConnectionStringSettings settings = ConfigurationManager.ConnectionStrings[name];
+            if (settings != null)
+                returnValue = settings.ConnectionString;
+            return returnValue;
+        }
         /// <summary>
         /// Création et retour de l'instance unique de la classe
         /// </summary>
@@ -129,6 +158,15 @@ namespace MediaTekDocuments.dal
             return lesRevues;
         }
 
+        /// <summary>
+        /// Retourne toutes les catégories de suivi à partir de la BDD
+        /// </summary>
+        /// <returns>Liste d'objets Suivis</returns>
+        public List<Suivi> GetAllSuivis()
+        {
+            IEnumerable<Suivi> lesSuivis = TraitementRecup<Suivi>(GET, "suivi");
+            return new List<Suivi>(lesSuivis);
+        }
 
         /// <summary>
         /// Retourne les exemplaires d'une revue
@@ -140,6 +178,32 @@ namespace MediaTekDocuments.dal
             String jsonIdDocument = convertToJson("id", idDocument);
             List<Exemplaire> lesExemplaires = TraitementRecup<Exemplaire>(GET, "exemplaire/" + jsonIdDocument);
             return lesExemplaires;
+        }
+
+        /// <summary>
+        /// Retourne les exemplaires d'une revue
+        /// </summary>
+        /// <param name="idLivre">id de la revue concernée</param>
+        /// <returns>Liste d'objets Exemplaire</returns>
+        public List<CommandeDocument> GetCommandesLivres(string idLivre)
+        {
+            String jsonIdDocument = convertToJson("idLivreDvd", idLivre);
+            List<CommandeDocument> lesCommandesLivres = TraitementRecup<CommandeDocument>(GET, "commandedocument/" + jsonIdDocument);
+            return lesCommandesLivres;
+        }
+
+        public Utilisateur GetLogin(string mail, string password)
+        {
+            Dictionary<string, string> login = new Dictionary<string, string>();
+            login.Add("mail", mail);
+            login.Add("password", password);
+            String mailPwd = JsonConvert.SerializeObject(login);
+            List<Utilisateur> utilisateurs = TraitementRecup<Utilisateur>(GET, "utilisateur/" + mailPwd);
+            if(utilisateurs.Count > 0)
+            { 
+                return utilisateurs[0];
+            }
+            return null;
         }
 
         /// <summary>
@@ -190,10 +254,13 @@ namespace MediaTekDocuments.dal
                 else
                 {
                     Console.WriteLine("code erreur = " + code + " message = " + (String)retour["message"]);
+                    Log.Fatal("code erreur = " + code + " message = " + (String)retour["message"]);
                 }
-            }catch(Exception e)
+            }
+            catch(Exception e)
             {
                 Console.WriteLine("Erreur lors de l'accès à l'API : "+e.Message);
+                Log.Fatal("Erreur lors de l'accès à l'API : " + e.Message);
                 Environment.Exit(0);
             }
             return liste;
