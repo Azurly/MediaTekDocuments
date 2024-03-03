@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using MediaTekDocuments.model;
 using MediaTekDocuments.dal;
+using System;
 
 namespace MediaTekDocuments.controller
 {
@@ -76,6 +77,14 @@ namespace MediaTekDocuments.controller
             return access.GetAllPublics();
         }
 
+        /// <summary>
+        /// getter sur les rayons
+        /// </summary>
+        /// <returns>Liste d'objets Rayon</returns>
+        public List<Suivi> GetAllSuivis()
+        {
+            return access.GetAllSuivis();
+        }
 
         /// <summary>
         /// récupère les exemplaires d'une revue
@@ -88,6 +97,16 @@ namespace MediaTekDocuments.controller
         }
 
         /// <summary>
+        /// récupère les exemplaires d'une revue
+        /// </summary>
+        /// <param name="idLivre">id de la revue concernée</param>
+        /// <returns>Liste d'objets Exemplaire</returns>
+        public List<CommandeDocument> GetCommandesLivres(string idLivre)
+        {
+            return access.GetCommandesLivres(idLivre);
+        }
+
+        /// <summary>
         /// Crée un exemplaire d'une revue dans la bdd
         /// </summary>
         /// <param name="exemplaire">L'objet Exemplaire concerné</param>
@@ -95,6 +114,26 @@ namespace MediaTekDocuments.controller
         public bool CreerExemplaire(Exemplaire exemplaire)
         {
             return access.CreerExemplaire(exemplaire);
+        }
+
+        public bool verifDroitAccueil(Utilisateur utilisateur)
+        {
+            Console.WriteLine(utilisateur.nom);
+            List<string> services = new List<string> {"0001","0002", "0003" };
+            if (services.Contains(utilisateur.idService))
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool verifCommande(Utilisateur utilisateur)
+        {
+            List<string> services = new List<string> { "0002" };
+            if (services.Contains(utilisateur.idService))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
