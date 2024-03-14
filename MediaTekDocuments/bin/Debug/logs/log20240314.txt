@@ -1,0 +1,5 @@
+2024-03-14 11:35:05.745 +01:00 [FTL] Erreur lors de l'accès à l'API : Une ou plusieurs erreurs se sont produites.
+2024-03-14 11:36:21.174 +01:00 [FTL] Erreur lors de l'accès à l'API : Une ou plusieurs erreurs se sont produites.
+2024-03-14 11:43:40.414 +01:00 [FTL] Erreur lors de l'accès à l'API : Une ou plusieurs erreurs se sont produites.
+2024-03-14 11:44:57.387 +01:00 [FTL] Erreur lors de l'accès à l'API : Une ou plusieurs erreurs se sont produites.
+2024-03-14 11:58:14.986 +01:00 [FTL] Erreur lors de l'accès à l'API : Une ou plusieurs erreurs se sont produites.

@@ -9,12 +9,12 @@ namespace MediaTekDocuments.model
     public class Suivi
     {
         public string id { get; set; }
-        public string etatCommande {  get; set; }
+        public string etat {  get; set; }
 
-        public Suivi(string id, string etatCommande)
+        public Suivi(string id, string etat)
         {
             this.id = id;
-            this.etatCommande = etatCommande;
+            this.etat = etat;
         }
     }
 }

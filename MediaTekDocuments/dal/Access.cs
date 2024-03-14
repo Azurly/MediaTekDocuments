@@ -191,6 +191,12 @@ namespace MediaTekDocuments.dal
             List<CommandeDocument> lesCommandesLivres = TraitementRecup<CommandeDocument>(GET, "commandedocument/" + jsonIdDocument);
             return lesCommandesLivres;
         }
+        public List<CommandeDocument> GetCommandesDvd(string idDvd)
+        {
+            String jsonIdDocument = convertToJson("idLivreDvd", idDvd);
+            List<CommandeDocument> lesCommandesDvd = TraitementRecup<CommandeDocument>(GET, "commandedocument/" + jsonIdDocument);
+            return lesCommandesDvd;
+        }
 
         public Utilisateur GetLogin(string mail, string password)
         {
@@ -238,6 +244,7 @@ namespace MediaTekDocuments.dal
             List<T> liste = new List<T>();
             try
             {
+                Console.WriteLine("TraitementRecup {0} et {1}", methode, message);
                 JObject retour = api.RecupDistant(methode, message);
                 // extraction du code retourné
                 String code = (String)retour["code"];
@@ -249,6 +256,7 @@ namespace MediaTekDocuments.dal
                         String resultString = JsonConvert.SerializeObject(retour["result"]);
                         // construction de la liste d'objets à partir du retour de l'api
                         liste = JsonConvert.DeserializeObject<List<T>>(resultString, new CustomBooleanJsonConverter());
+
                     }
                 }
                 else
