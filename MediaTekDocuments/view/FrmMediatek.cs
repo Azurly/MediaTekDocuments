@@ -9,6 +9,7 @@ using System.IO;
 using Newtonsoft.Json;
 using Serilog;
 using System.Xml.Linq;
+using MediaTekDocuments.dal;
 
 namespace MediaTekDocuments.view
 
@@ -1282,6 +1283,7 @@ namespace MediaTekDocuments.view
             RemplirDvdListeCompleteCommande();
         }
 
+        #region CommandeLivreAffichages
         /// <summary>
         /// Remplit le dategrid avec la liste reçue en paramètre
         /// </summary>
@@ -1634,6 +1636,12 @@ namespace MediaTekDocuments.view
             }
             RemplirDvdListeCommande(sortedListCommande);
         }
+        #endregion
+
+        #region BoutonsDvDCommande
+
+        
+        #endregion
 
         #endregion
 

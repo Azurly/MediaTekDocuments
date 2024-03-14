@@ -41,6 +41,15 @@ namespace MediaTekDocuments.dal
         private const string POST = "POST";
         /// <summary>
         /// méthode HTTP pour update
+        /// </summary>
+        private const string PUT = "PUT";
+        /// <summary>
+        /// méthode HTTP pour delete
+        /// </summary>
+        private const string DELETE = "DELETE";
+
+        /// <summary>
+        /// méthode HTTP pour update
 
         /// <summary>
         /// Méthode privée pour créer un singleton
@@ -230,6 +239,52 @@ namespace MediaTekDocuments.dal
                 Console.WriteLine(ex.Message);
             }
             return false; 
+        }
+
+        public bool CreerEntite(string type, String jsonEntite)
+        {
+            try
+            {
+                // récupération soit d'une liste vide (requête ok) soit de null (erreur)
+                List<Object> liste = TraitementRecup<Object>(POST, type + "/" + jsonEntite);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Access.CreerEntite catch type erreur={0}, table={1}, champs={2}", ex, type, jsonEntite);
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+
+        public bool UpdateEntite(string type, string id, String jsonEntite)
+        {
+            try
+            {
+                List<Object> liste = TraitementRecup<Object>(PUT, type + "/" + id + "/" + jsonEntite);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Access.UpdateEntite catch type erreur={0}, table={1}, champs={2}", ex, type, jsonEntite);
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+
+        public bool SupprimerEntite(string type, String jsonEntite)
+        {
+            try
+            {
+                List<Object> liste = TraitementRecup<Object>(DELETE, type + "/" + jsonEntite);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Access.SupprimerEntite catch type erreur={0}, table={1}, champs={2}", ex, type, jsonEntite);
+                Console.WriteLine(ex.Message);
+            }
+            return false;
         }
 
         /// <summary>

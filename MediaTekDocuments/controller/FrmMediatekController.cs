@@ -2,6 +2,7 @@
 using MediaTekDocuments.model;
 using MediaTekDocuments.dal;
 using System;
+using Newtonsoft.Json;
 
 namespace MediaTekDocuments.controller
 {
@@ -121,6 +122,19 @@ namespace MediaTekDocuments.controller
             return access.CreerExemplaire(exemplaire);
         }
 
+        public bool CreerDvd(Dvd dvd)
+        {
+            return access.CreerEntite("dvd", JsonConvert.SerializeObject(dvd));
+        }
+        public bool UpdateDvd(Dvd dvd)
+        {
+            return access.UpdateEntite("dvd", dvd.Id, JsonConvert.SerializeObject(dvd));
+        }
+        public bool DeleteDvd(Dvd dvd)
+        {
+            return access.SupprimerEntite("dvd", JsonConvert.SerializeObject(dvd));
+        }
+        #region Login et Utilisateur
         public bool verifDroitAccueil(Utilisateur utilisateur)
         {
             Console.WriteLine(utilisateur.nom);
@@ -140,5 +154,6 @@ namespace MediaTekDocuments.controller
             }
             return false;
         }
+        #endregion
     }
 }
