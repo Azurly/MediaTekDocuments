@@ -1639,8 +1639,42 @@ namespace MediaTekDocuments.view
         #endregion
 
         #region BoutonsDvDCommande
+        private void btnAjouterDvdCommande_Click(object sender, EventArgs e)
+        {
+            if (!txbDvdCommandeNumDvd.Text.Equals(""))
+            {
+                try
+                {
+                    string numero = txbDvdCommandeNbCommande.Text;
+                    DateTime dateCommande = dtpDvdCommandeDateCommande.Value;
+                    string idLivreDvd = txbDvdCommandeNumDvd.Text;
+                    float montant = float.Parse(txbDvdCommandeMontant.Text);
+                    int nbExemplaire = int.Parse(txbDvdCommandeExemplaire.Text);   
+                    string etat = "En Cours";
+                    string idSuivi = txbReceptionRevueNumero.Text;
+                    CommandeDocument commandeDocument = new CommandeDocument(numero, dateCommande, montant, nbExemplaire, idLivreDvd, idSuivi, etat);
+                    if (controller.CreerCommandeDvd(commandeDocument))
+                    {
+                        AfficheCommandeDvdInfosCommande(commandeDocument);
+                    }
+                    else
+                    {
+                        MessageBox.Show("numéro de publication déjà existant", "Erreur");
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("le numéro de parution doit être numérique", "Information");
+                    txbDvdCommandeNbCommande.Text = "";
+                    txbDvdCommandeNbCommande.Focus();
+                }
+            }
+            else
+            {
+                MessageBox.Show("numéro de parution obligatoire", "Information");
+            }
+        }
 
-        
         #endregion
 
         #endregion
@@ -1652,5 +1686,7 @@ namespace MediaTekDocuments.view
         }
 
         #endregion
+
+        
     }
 }

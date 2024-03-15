@@ -16,5 +16,9 @@ namespace MediaTekDocuments.model
             this.id = id;
             this.etat = etat;
         }
+        public override string ToString()
+        {
+            return this.etat;
+        }
     }
 }

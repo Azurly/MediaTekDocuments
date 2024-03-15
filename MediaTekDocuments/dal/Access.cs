@@ -221,6 +221,78 @@ namespace MediaTekDocuments.dal
             return null;
         }
 
+        #region Template Methode POST PUT DELETE
+        ///
+        /// 
+        /// 
+        /// <summary>
+        /// Créer une entite dans la BDD, return true si l'opération, c'est correctement déroulé
+        /// </summary>
+        /// <param name="jsonEntite"></param>
+        /// <returns></returns>
+        public bool CreerEntite(string type, String jsonEntite)
+        {
+            try
+            {
+                // récupération soit d'une liste vide (requête ok) soit de null (erreur)
+                List<Object> liste = TraitementRecup<Object>(POST, type + "/" + jsonEntite);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Access.CreerEntite catch type erreur={0}, table={1}, champs={2}", ex, type, jsonEntite);
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Modifie une entite dans la BDD, return true si l'opération, c'est correctement déroulé
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="jsonEntite"></param>
+        /// <returns></returns>
+        public bool UpdateEntite(string type, string id, String jsonEntite)
+        {
+            try
+            {
+                // récupération soit d'une liste vide (requête ok) soit de null (erreur)
+                List<Object> liste = TraitementRecup<Object>(PUT, type + "/" + id + "/" + jsonEntite);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Access.UpdateEntite catch type erreur={0}, table={1}, champs={2}", ex, type, jsonEntite);
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Supprime une entité dans la BDD, return true si l'opération, c'est correctement déroulé
+        /// </summary>
+        /// <param name="jsonEntite"></param>
+        /// <returns></returns>
+        public bool SupprimerEntite(string type, String jsonEntite)
+        {
+            try
+            {
+                // récupération soit d'une liste vide (requête ok) soit de null (erreur)
+                List<Object> liste = TraitementRecup<Object>(DELETE, type + "/" + jsonEntite);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Access.SupprimerEntite catch type erreur={0}, table={1}, champs={2}", ex, type, jsonEntite);
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+        ///
+        /// 
+        /// 
+        #endregion
+        #region POST PUT DELTE Exemplaire
         /// <summary>
         /// ecriture d'un exemplaire en base de données
         /// </summary>
@@ -240,53 +312,87 @@ namespace MediaTekDocuments.dal
             }
             return false; 
         }
-
-        public bool CreerEntite(string type, String jsonEntite)
+        public bool UpdateExemplaire(Exemplaire exemplaire)
         {
+            String jsonExemplaire = JsonConvert.SerializeObject(exemplaire, new CustomDateTimeConverter());
             try
             {
                 // récupération soit d'une liste vide (requête ok) soit de null (erreur)
-                List<Object> liste = TraitementRecup<Object>(POST, type + "/" + jsonEntite);
+                List<Exemplaire> liste = TraitementRecup<Exemplaire>(PUT, "exemplaire/" + jsonExemplaire);
                 return (liste != null);
             }
             catch (Exception ex)
             {
-                Log.Error("Access.CreerEntite catch type erreur={0}, table={1}, champs={2}", ex, type, jsonEntite);
                 Console.WriteLine(ex.Message);
             }
             return false;
         }
 
-        public bool UpdateEntite(string type, string id, String jsonEntite)
+        public bool DeleteExemplaire(Exemplaire exemplaire)
         {
+            String jsonExemplaire = JsonConvert.SerializeObject(exemplaire, new CustomDateTimeConverter());
             try
             {
-                List<Object> liste = TraitementRecup<Object>(PUT, type + "/" + id + "/" + jsonEntite);
+                // récupération soit d'une liste vide (requête ok) soit de null (erreur)
+                List<Exemplaire> liste = TraitementRecup<Exemplaire>(DELETE, "exemplaire/" + jsonExemplaire);
                 return (liste != null);
             }
             catch (Exception ex)
             {
-                Log.Error("Access.UpdateEntite catch type erreur={0}, table={1}, champs={2}", ex, type, jsonEntite);
                 Console.WriteLine(ex.Message);
             }
             return false;
         }
-
-        public bool SupprimerEntite(string type, String jsonEntite)
+        #endregion
+        #region POST PUT DELETE CommandeDocument
+        public bool CreerCommandeDocument(CommandeDocument commandeDocument)
         {
+            String jsonExemplaire = JsonConvert.SerializeObject(commandeDocument, new CustomDateTimeConverter());
             try
             {
-                List<Object> liste = TraitementRecup<Object>(DELETE, type + "/" + jsonEntite);
+                // récupération soit d'une liste vide (requête ok) soit de null (erreur)
+                List<Exemplaire> liste = TraitementRecup<Exemplaire>(POST, "commandedocument/" + jsonExemplaire);
                 return (liste != null);
             }
             catch (Exception ex)
             {
-                Log.Error("Access.SupprimerEntite catch type erreur={0}, table={1}, champs={2}", ex, type, jsonEntite);
                 Console.WriteLine(ex.Message);
             }
             return false;
         }
 
+        public bool UpdateCommandeDocument(CommandeDocument commandeDocument)
+        {
+            String jsonExemplaire = JsonConvert.SerializeObject(commandeDocument, new CustomDateTimeConverter());
+            try
+            {
+                // récupération soit d'une liste vide (requête ok) soit de null (erreur)
+                List<Exemplaire> liste = TraitementRecup<Exemplaire>(PUT, "commandedocument/" + jsonExemplaire);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+
+        public bool DeleteCommandeDocument(CommandeDocument commandeDocument)
+        {
+            String jsonExemplaire = JsonConvert.SerializeObject(commandeDocument, new CustomDateTimeConverter());
+            try
+            {
+                // récupération soit d'une liste vide (requête ok) soit de null (erreur)
+                List<Exemplaire> liste = TraitementRecup<Exemplaire>(DELETE, "commandedocument/" + jsonExemplaire);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+        #endregion
         /// <summary>
         /// Traitement de la récupération du retour de l'api, avec conversion du json en liste pour les select (GET)
         /// </summary>

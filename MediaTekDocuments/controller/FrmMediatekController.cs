@@ -122,18 +122,20 @@ namespace MediaTekDocuments.controller
             return access.CreerExemplaire(exemplaire);
         }
 
-        public bool CreerDvd(Dvd dvd)
+        public bool CreerCommandeDvd(CommandeDocument commandeDocument)
         {
-            return access.CreerEntite("dvd", JsonConvert.SerializeObject(dvd));
+            return access.CreerCommandeDocument(commandeDocument);
         }
-        public bool UpdateDvd(Dvd dvd)
+        public bool UpdateCommandeDvd(CommandeDocument commandeDocument)
         {
-            return access.UpdateEntite("dvd", dvd.Id, JsonConvert.SerializeObject(dvd));
+            return access.UpdateCommandeDocument(commandeDocument);
         }
-        public bool DeleteDvd(Dvd dvd)
+        public bool DeleteCommandeDvd(CommandeDocument commandeDocument)
         {
-            return access.SupprimerEntite("dvd", JsonConvert.SerializeObject(dvd));
+            return access.DeleteCommandeDocument(commandeDocument);
         }
+        
+    
         #region Login et Utilisateur
         public bool verifDroitAccueil(Utilisateur utilisateur)
         {
