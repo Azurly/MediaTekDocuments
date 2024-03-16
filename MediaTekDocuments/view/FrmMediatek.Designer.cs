@@ -1863,6 +1863,7 @@ namespace MediaTekDocuments.view
             this.btnSupprimerDvdCommande.TabIndex = 45;
             this.btnSupprimerDvdCommande.Text = "Supprimer";
             this.btnSupprimerDvdCommande.UseVisualStyleBackColor = true;
+            this.btnSupprimerDvdCommande.Click += new System.EventHandler(this.btnSupprimerDvdCommande_Click);
             // 
             // btnModifierDvdCommande
             // 
@@ -1872,6 +1873,7 @@ namespace MediaTekDocuments.view
             this.btnModifierDvdCommande.TabIndex = 44;
             this.btnModifierDvdCommande.Text = "Modifier";
             this.btnModifierDvdCommande.UseVisualStyleBackColor = true;
+            this.btnModifierDvdCommande.Click += new System.EventHandler(this.btnModifierDvdCommande_Click);
             // 
             // btnAjouterDvdCommande
             // 

@@ -1674,7 +1674,52 @@ namespace MediaTekDocuments.view
                 MessageBox.Show("numéro de parution obligatoire", "Information");
             }
         }
-
+        private void btnModifierDvdCommande_Click(object sender, EventArgs e)
+        {
+            /*if (dgvCommandeDvdListCommande.CurrentCell != null && txbDvdCommandeNbCommande.Text != "")
+            {
+                List<Suivi> lesSuivi = controller.GetAllSuivis().FindAll(o => o.id >= ((Suivi)cbxDvdCommandeEtat.SelectedItem).id).ToList();
+                if (lesSuivi.Count > 2)
+                    lesSuivi = lesSuivi.FindAll(o => o.id < 4).ToList();
+                RemplirComboSuiviCommande(lesSuivi, bdgCommandeDvdEtat, cbxDvdCommandeEtat);
+                cbxDvdCommandeEtat.SelectedIndex = 0;
+            }
+            else
+            {
+                MessageBox.Show("Pas de commande sélectionnée");
+            }*/
+        }
+        private void btnSupprimerDvdCommande_Click(object sender, EventArgs e)
+        {
+            CommandeDocument commandeDocument = (CommandeDocument)bdgCommandeDvdListeCommande[bdgCommandeDvdListeCommande.Position];
+            if (dgvCommandeDvdListCommande.CurrentCell != null && txbDvdCommandeNbCommande.Text != "")
+            {
+                if (commandeDocument.idSuivi == "2")
+                {
+                    MessageBox.Show("Une commande fini ne peux être supprimée");
+                }
+                else if (MessageBox.Show("Etes vous sur de vouloir supprimer la commande n° "+ commandeDocument.id + "?", "Validation suppresion", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    if (controller.DeleteCommandeDvd(commandeDocument))
+                    {
+                        try
+                        {
+                            Dvd dvd = (Dvd)bdgDvdListeCommande.List[bdgDvdListeCommande.Position];
+                            AfficheDvdInfos(dvd);
+                            txbDvdNumero.Text = dvd.Id;
+                        }
+                        catch
+                        {
+                            VideDvdZonesCommande();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Selectionner une commande");
+            }
+        }
         #endregion
 
         #endregion
@@ -1684,6 +1729,8 @@ namespace MediaTekDocuments.view
         {
             Application.Exit();
         }
+
+
 
         #endregion
 
