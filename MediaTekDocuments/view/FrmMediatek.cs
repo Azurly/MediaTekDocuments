@@ -693,6 +693,47 @@ namespace MediaTekDocuments.view
             }
             RemplirDvdListe(sortedList);
         }
+
+        #region Bouton Dvd
+        private void btnAjouterDvd_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void btnModifierDvd_Click(object sender, EventArgs e)
+        {
+            if (dgvDvdListe.SelectedRows.Count > 0)
+            {
+                // Récupérer la personne sélectionnée
+                Dvd dvdSelectionnee = (Dvd)dgvDvdListe.SelectedRows[0].DataBoundItem;
+
+            }
+        }
+        private void btnSupprimerDvd_Click(object sender, EventArgs e)
+        {
+            Dvd dvd = (Dvd)bdgDvdListe[bdgDvdListe.Position];
+            if (dgvDvdListe.CurrentCell != null)
+            {
+                if (MessageBox.Show("Etes vous sur de vouloir supprimer le dvd n° " + dvd.Id + "?", "Validation suppresion", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    if (controller.DeleteDvd(dvd))
+                    {
+                        try
+                        {
+                            MessageBox.Show("Dvd supprimé");
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Le dvd ne peut pas être supprimé");
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Selectionner un dvd");
+            }
+        }
+        #endregion
         #endregion
 
         #region Onglet Revues
@@ -1729,6 +1770,9 @@ namespace MediaTekDocuments.view
         {
             Application.Exit();
         }
+
+
+
 
 
 
