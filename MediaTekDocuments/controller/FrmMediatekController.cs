@@ -134,8 +134,20 @@ namespace MediaTekDocuments.controller
         {
             return access.DeleteCommandeDocument(commandeDocument);
         }
-        
-    
+        public bool CreerDvd(Dvd dvd)
+        {
+            return access.CreerDvd(dvd);
+        }
+        public bool UpdateDvd(Dvd dvd)
+        {
+            return access.UpdateDvd(dvd);
+        }
+        public bool DeleteDvd(Dvd dvd)
+        {
+            return access.DeleteDvd(dvd) ;
+        }
+
+
         #region Login et Utilisateur
         public bool verifDroitAccueil(Utilisateur utilisateur)
         {

@@ -393,6 +393,55 @@ namespace MediaTekDocuments.dal
             return false;
         }
         #endregion
+        #region POST PUT DELETE Dvd
+        public bool CreerDvd(Dvd dvd)
+        {
+            String jsonExemplaire = JsonConvert.SerializeObject(dvd, new CustomDateTimeConverter());
+            try
+            {
+                // récupération soit d'une liste vide (requête ok) soit de null (erreur)
+                List<Exemplaire> liste = TraitementRecup<Exemplaire>(POST, "dvd/" + jsonExemplaire);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+
+        public bool UpdateDvd(Dvd dvd)
+        {
+            String jsonExemplaire = JsonConvert.SerializeObject(dvd, new CustomDateTimeConverter());
+            try
+            {
+                // récupération soit d'une liste vide (requête ok) soit de null (erreur)
+                List<Exemplaire> liste = TraitementRecup<Exemplaire>(PUT, "dvd/" + jsonExemplaire);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+
+        public bool DeleteDvd(Dvd dvd)
+        {
+            String jsonExemplaire = JsonConvert.SerializeObject(dvd, new CustomDateTimeConverter());
+            try
+            {
+                // récupération soit d'une liste vide (requête ok) soit de null (erreur)
+                List<Exemplaire> liste = TraitementRecup<Exemplaire>(DELETE, "dvd/" + jsonExemplaire);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+        #endregion
         /// <summary>
         /// Traitement de la récupération du retour de l'api, avec conversion du json en liste pour les select (GET)
         /// </summary>

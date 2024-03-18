@@ -1,0 +1,4 @@
+2024-03-17 10:31:28.191 +01:00 [FTL] code erreur = 400 message = requete invalide
+2024-03-17 10:36:49.824 +01:00 [FTL] code erreur = 400 message = requete invalide
+2024-03-17 10:44:33.789 +01:00 [FTL] code erreur = 400 message = requete invalide
+2024-03-17 10:44:40.848 +01:00 [FTL] code erreur = 400 message = requete invalide
