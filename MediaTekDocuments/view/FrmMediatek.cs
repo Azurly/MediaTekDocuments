@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using Serilog;
 using System.Xml.Linq;
 using MediaTekDocuments.dal;
+using System.Text.RegularExpressions;
 
 namespace MediaTekDocuments.view
 
@@ -697,6 +698,16 @@ namespace MediaTekDocuments.view
         #region Bouton Dvd
         private void btnAjouterDvd_Click(object sender, EventArgs e)
         {
+            string idNouveauDvd = txbAjoutDvd.Text;
+            if (idNouveauDvd !="" && Regex.IsMatch(idNouveauDvd, @"^20000$|^2[0-9]{4,}$"))
+            {
+                Dvd dvd = new Dvd(idNouveauDvd, "", "", 0, "", "", "", "", "", "", "", "");
+                controller.CreerDvd(dvd);
+            }
+            else
+            {
+                MessageBox.Show("L'id n'est pas valide, veuillez rentrer un ID supérieur à 20000 et qui n'est pas existant !");
+            }
 
         }
         private void btnModifierDvd_Click(object sender, EventArgs e)
@@ -705,7 +716,7 @@ namespace MediaTekDocuments.view
             {
                 // Récupérer la personne sélectionnée
                 Dvd dvdSelectionnee = (Dvd)dgvDvdListe.SelectedRows[0].DataBoundItem;
-
+                //controller.UpdateDvd(dvdSelectionnee);
             }
         }
         private void btnSupprimerDvd_Click(object sender, EventArgs e)
@@ -1776,8 +1787,7 @@ namespace MediaTekDocuments.view
 
 
 
-        #endregion
 
-        
+        #endregion
     }
 }

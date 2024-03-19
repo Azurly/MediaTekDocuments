@@ -96,12 +96,6 @@
     <Reference Include="ZstdNet, Version=1.4.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="controller\FormAjout.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="controller\FormAjout.Designer.cs">
-      <DependentUpon>FormAjout.cs</DependentUpon>
-    </Compile>
     <Compile Include="controller\FrmLoginController.cs" />
     <Compile Include="manager\ApiRest.cs" />
     <Compile Include="controller\FrmMediatekController.cs" />
@@ -135,9 +129,6 @@
     <Compile Include="model\Revue.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="controller\FormAjout.resx">
-      <DependentUpon>FormAjout.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
