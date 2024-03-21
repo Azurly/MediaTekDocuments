@@ -2245,7 +2245,6 @@ namespace MediaTekDocuments.view
             this.ClientSize = new System.Drawing.Size(883, 659);
             this.Controls.Add(this.tabOngletsApplication);
             this.Name = "FrmMediatek";
-            this.Text = "Gestion des documents de la médiathèque";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMediatek_FormClosing);
             this.tabOngletsApplication.ResumeLayout(false);
             this.tabLivres.ResumeLayout(false);

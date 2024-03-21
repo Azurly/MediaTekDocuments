@@ -466,7 +466,6 @@ namespace MediaTekDocuments.dal
                         String resultString = JsonConvert.SerializeObject(retour["result"]);
                         // construction de la liste d'objets à partir du retour de l'api
                         liste = JsonConvert.DeserializeObject<List<T>>(resultString, new CustomBooleanJsonConverter());
-
                     }
                 }
                 else

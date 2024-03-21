@@ -701,7 +701,7 @@ namespace MediaTekDocuments.view
             string idNouveauDvd = txbAjoutDvd.Text;
             if (idNouveauDvd !="" && Regex.IsMatch(idNouveauDvd, @"^20000$|^2[0-9]{4,}$"))
             {
-                Dvd dvd = new Dvd(idNouveauDvd, "", "", 0, "", "", "", "", "", "", "", "");
+                Dvd dvd = new Dvd(idNouveauDvd, "", "", 0, "", "", "10002", "", "00003", "", "DF001", "");
                 controller.CreerDvd(dvd);
             }
             else
@@ -716,6 +716,7 @@ namespace MediaTekDocuments.view
             {
                 // Récupérer la personne sélectionnée
                 Dvd dvdSelectionnee = (Dvd)dgvDvdListe.SelectedRows[0].DataBoundItem;
+                controller.UpdateDvd(dvdSelectionnee);
                 //controller.UpdateDvd(dvdSelectionnee);
             }
         }
