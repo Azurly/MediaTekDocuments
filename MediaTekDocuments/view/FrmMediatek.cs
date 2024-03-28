@@ -430,6 +430,7 @@ namespace MediaTekDocuments.view
             }
         }
         #endregion
+        #endregion
 
         #region Onglet Dvd
         private readonly BindingSource bdgDvdListe = new BindingSource();
