@@ -442,6 +442,55 @@ namespace MediaTekDocuments.dal
             return false;
         }
         #endregion
+        #region POST PUT DELETE Livre
+        public bool CreerLivre(Livre livre)
+        {
+            String jsonExemplaire = JsonConvert.SerializeObject(livre, new CustomDateTimeConverter());
+            try
+            {
+                // récupération soit d'une liste vide (requête ok) soit de null (erreur)
+                List<Exemplaire> liste = TraitementRecup<Exemplaire>(POST, "livre/" + jsonExemplaire);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+
+        public bool UpdateLivre(Livre livre)
+        {
+            String jsonExemplaire = JsonConvert.SerializeObject(livre, new CustomDateTimeConverter());
+            try
+            {
+                // récupération soit d'une liste vide (requête ok) soit de null (erreur)
+                List<Exemplaire> liste = TraitementRecup<Exemplaire>(PUT, "livre/" + jsonExemplaire);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+
+        public bool DeleteLivre(Livre livre)
+        {
+            String jsonExemplaire = JsonConvert.SerializeObject(livre, new CustomDateTimeConverter());
+            try
+            {
+                // récupération soit d'une liste vide (requête ok) soit de null (erreur)
+                List<Exemplaire> liste = TraitementRecup<Exemplaire>(DELETE, "livre/" + jsonExemplaire);
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return false;
+        }
+        #endregion
         /// <summary>
         /// Traitement de la récupération du retour de l'api, avec conversion du json en liste pour les select (GET)
         /// </summary>

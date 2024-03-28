@@ -1,0 +1,2 @@
+2024-03-28 17:45:12.264 +01:00 [FTL] Erreur lors de l'accès à l'API : Une ou plusieurs erreurs se sont produites.
+2024-03-28 17:46:56.871 +01:00 [FTL] code erreur = 400 message = requete invalide

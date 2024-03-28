@@ -379,6 +379,56 @@ namespace MediaTekDocuments.view
             }
             RemplirLivresListe(sortedList);
         }
+        #region Bouton Livre
+        private void btnAjouterLivre_Click(object sender, EventArgs e)
+        {
+            string idNouveauDvd = txbAjoutLivre.Text;
+            if (idNouveauDvd != "")
+            {
+                Livre livre = new Livre(idNouveauDvd, "", "", "", "", "", "10002", "", "00003", "", "DF001", "");
+                controller.CreerLivre(livre);
+            }
+            else
+            {
+                MessageBox.Show("L'id existe déjà !");
+            }
+
+        }
+        private void btnModifierLivre_Click(object sender, EventArgs e)
+        {
+            if (dgvLivresListe.SelectedRows.Count > 0)
+            {
+                // Récupérer la personne sélectionnée
+                Livre livreSelectionnee = (Livre)dgvLivresListe.SelectedRows[0].DataBoundItem;
+                controller.UpdateLivre(livreSelectionnee);
+                //controller.UpdateDvd(dvdSelectionnee);
+            }
+        }
+        private void btnSupprimerLivre_Click(object sender, EventArgs e)
+        {
+            Livre livre = (Livre)bdgLivresListe[bdgLivresListe.Position];
+            if (dgvLivresListe.CurrentCell != null)
+            {
+                if (MessageBox.Show("Etes vous sur de vouloir supprimer le livre n° " + livre.Id + "?", "Validation suppresion", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    if (controller.DeleteLivre(livre))
+                    {
+                        try
+                        {
+                            MessageBox.Show("Livre supprimé");
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Le livre ne peut pas être supprimé");
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Selectionner un livre");
+            }
+        }
         #endregion
 
         #region Onglet Dvd

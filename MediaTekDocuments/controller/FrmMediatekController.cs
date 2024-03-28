@@ -146,6 +146,18 @@ namespace MediaTekDocuments.controller
         {
             return access.DeleteDvd(dvd) ;
         }
+        public bool CreerLivre(Livre livre)
+        {
+            return access.CreerLivre(livre);
+        }
+        public bool UpdateLivre(Livre livre)
+        {
+            return access.UpdateLivre(livre);
+        }
+        public bool DeleteLivre(Livre livre)
+        {
+            return access.DeleteLivre(livre);
+        }
 
 
         #region Login et Utilisateur
