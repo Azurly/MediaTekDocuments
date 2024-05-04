@@ -37,3 +37,9 @@
 2024-03-21 09:31:05.478 +01:00 [FTL] code erreur = 400 message = requete invalide
 2024-03-21 09:31:28.664 +01:00 [FTL] code erreur = 400 message = requete invalide
 2024-03-21 09:36:33.887 +01:00 [FTL] code erreur = 400 message = requete invalide
+2024-05-04 21:34:02.123 +02:00 [FTL] code erreur = 500 message = erreur serveur
+2024-05-04 21:35:09.419 +02:00 [FTL] code erreur = 500 message = erreur serveur
+2024-05-04 21:36:13.852 +02:00 [FTL] code erreur = 500 message = erreur serveur
+2024-05-04 21:38:19.455 +02:00 [FTL] code erreur = 500 message = erreur serveur
+2024-05-04 21:39:25.257 +02:00 [FTL] code erreur = 500 message = erreur serveur
+2024-05-04 22:51:30.012 +02:00 [FTL] code erreur = 401 message = authentification incorrecte

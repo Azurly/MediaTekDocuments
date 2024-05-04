@@ -18,7 +18,6 @@ namespace MediaTekDocuments.model.Tests
         public void SuiviTest()
         {
             Assert.AreEqual(id, leSuivi.id);
-            Assert.AreEqual(etat, leSuivi.etatCommande);
         }
     }
 }

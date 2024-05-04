@@ -1,0 +1,6 @@
+2024-05-04 21:34:02.123 +02:00 [FTL] code erreur = 500 message = erreur serveur
+2024-05-04 21:35:09.419 +02:00 [FTL] code erreur = 500 message = erreur serveur
+2024-05-04 21:36:13.852 +02:00 [FTL] code erreur = 500 message = erreur serveur
+2024-05-04 21:38:19.455 +02:00 [FTL] code erreur = 500 message = erreur serveur
+2024-05-04 21:39:25.257 +02:00 [FTL] code erreur = 500 message = erreur serveur
+2024-05-04 22:51:30.012 +02:00 [FTL] code erreur = 401 message = authentification incorrecte
